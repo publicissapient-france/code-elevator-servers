@@ -30,19 +30,15 @@ class ElevatorServer implements HttpHandler {
         Map<String, String> parameters = extractParameters(requestURI);
         switch (requestURI.getPath()) {
             case "/reset":
-                String cause = parameters.get("cause");
-                elevator.reset(cause);
+                elevator.reset(parameters.get("cause"));
                 httpExchange.sendResponseHeaders(200, 0);
                 break;
             case "/call":
-                int atFloor = parseInt(parameters.get("atFloor"));
-                Direction to = Direction.valueOf(parameters.get("to"));
-                elevator.call(atFloor, to);
+                elevator.call(parseInt(parameters.get("atFloor")), Direction.valueOf(parameters.get("to")));
                 httpExchange.sendResponseHeaders(200, 0);
                 break;
             case "/go":
-                int floorToGo = parseInt(parameters.get("floorToGo"));
-                elevator.go(floorToGo);
+                elevator.go(parseInt(parameters.get("floorToGo")));
                 httpExchange.sendResponseHeaders(200, 0);
                 break;
             case "/nextCommand":
