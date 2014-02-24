@@ -1,4 +1,4 @@
-## Server with node.js.
+## Node.js implementation of code elevator server.
 
 ### What I have to do ?
 
