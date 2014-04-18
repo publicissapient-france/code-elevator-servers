@@ -65,7 +65,7 @@ class ElevatorServer implements HttpHandler {
         httpServer.createContext("/", new ElevatorServer(new ElevatorEngine()));
         httpServer.start();
 
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> httpServer.stop(1000)));
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> httpServer.stop(1)));
     }
 
     private static Map<String, String> extractParameters(URI uri) {

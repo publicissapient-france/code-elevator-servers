@@ -69,7 +69,7 @@ object ElevatorServer {
     httpServer.start()
 
     Runtime.getRuntime.addShutdownHook(new Thread(new Runnable() {
-      override def run(): Unit = httpServer.stop(1000)
+      override def run(): Unit = httpServer.stop(1)
     }))
   }
 }
