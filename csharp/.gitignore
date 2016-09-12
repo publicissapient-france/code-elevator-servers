@@ -1,0 +1,8 @@
+#RiderC#
+.idea/
+*.*.iml
+
+
+Debug/
+*.nlp
+
