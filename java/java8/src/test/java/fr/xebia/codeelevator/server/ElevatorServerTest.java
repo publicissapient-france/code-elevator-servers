@@ -4,10 +4,11 @@ import com.sun.net.httpserver.HttpExchange;
 import fr.xebia.codeelevator.Command;
 import fr.xebia.codeelevator.Direction;
 import fr.xebia.codeelevator.ElevatorEngine;
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -17,8 +18,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
 public class ElevatorServerTest {
+
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
+
     @Mock
     private ElevatorEngine elevatorEngine;
 
