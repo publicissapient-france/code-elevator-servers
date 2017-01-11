@@ -1,12 +1,12 @@
 package fr.xebia.codeelevator
 
 import Direction.Direction
-import Command.Command
+import Command.{Command, NOTHING}
 
 class ElevatorEngine {
   def nextCommand: Command = {
-    println(s"nextCommand : ${Command.NOTHING}")
-    Command.NOTHING
+    println(s"nextCommand: $NOTHING")
+    NOTHING
   }
 
   def call(atFloor: Int, to: Direction): Unit = {

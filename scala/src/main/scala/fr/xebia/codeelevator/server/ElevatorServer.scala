@@ -2,7 +2,6 @@ package fr.xebia.codeelevator.server
 
 import com.sun.net.httpserver.{HttpExchange, HttpHandler, HttpServer}
 import java.net.{URI, InetSocketAddress}
-import java.lang.Thread
 import scala.collection.immutable.Map
 import scala.collection.immutable.HashMap
 import java.util.Scanner
@@ -18,13 +17,13 @@ class ElevatorHttpHandler extends HttpHandler {
     val parameters: Map[String, String] = extractParameters(requestURI)
     requestURI.getPath match {
       case "/reset" =>
-        elevator.reset(parameters.get("cause").get)
+        elevator.reset(parameters("cause"))
         httpExchange.sendResponseHeaders(200, 0)
       case "/call" =>
-        elevator.call(parseInt(parameters.get("atFloor").get), Direction.withName(parameters.get("to").get))
+        elevator.call(parseInt(parameters("atFloor")), Direction.withName(parameters("to")))
         httpExchange.sendResponseHeaders(200, 0)
       case "/go" =>
-        elevator.go(parseInt(parameters.get("floorToGo").get))
+        elevator.go(parseInt(parameters("floorToGo")))
         httpExchange.sendResponseHeaders(200, 0)
       case "/nextCommand" =>
         val nextCommand: String = elevator.nextCommand.toString
@@ -68,8 +67,6 @@ object ElevatorServer {
     httpServer.createContext("/", new ElevatorHttpHandler())
     httpServer.start()
 
-    Runtime.getRuntime.addShutdownHook(new Thread(new Runnable() {
-      override def run(): Unit = httpServer.stop(1)
-    }))
+    Runtime.getRuntime.addShutdownHook(new Thread(() => httpServer.stop(1)))
   }
 }
